@@ -24,31 +24,27 @@ try:
         correctAnswer = x[1]
         userInput = input(f"In what year was {question}?")
         inputInt = int(userInput)
-        if inputInt == correctAnswer:
+        absoluteValue = abs(inputInt - correctAnswer)
+
+        if absoluteValue == 0:
             score+=10
             print(f'Correct! You got 10 points, Score is now {score}.')
-        elif input > correctAnswer:
-            print{}
+
+        elif absoluteValue <= 5:
+            score+=5
+            print(f'You were so close! You were {absoluteValue} years off. The correct answer was {correctAnswer}. You still get 5 points! Your new score is {score}')
+
+        elif absoluteValue <= 10:
+            score+=2
+            print(f'Incorrect. You were {absoluteValue} years off. The correct answer was {correctAnswer}. You still get 2 points! Your new score is {score}')
+
+        elif absoluteValue <= 20:
+            score+=1
+            print(f'Incorrect. You were {absoluteValue} years off. The correct answer was {correctAnswer}. You still get 1 point! Your new score is {score}')
+        
+        else:
+            print(f"Incorrect, Your guess was too big and didn't earn any points. You were {absoluteValue} years off, The correct answer was {correctAnswer}")
+
+    print(f"Thank you for playing the Guessing game 'A Year to Remember' your final score was {score}")
 except:
     print("Invalid input Please try again")
-
-
-
-
-
-# Have validation 
-def UserInt():
-    iTemp = 0
-    date = input("What is the date?")
-    while iTemp <= 0:
-        try:
-            iTemp = date
-        except:
-            print("Please enter a valid date")
-        else:
-            return iTemp
-
-
-
-
-
