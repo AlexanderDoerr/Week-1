@@ -23,21 +23,20 @@ print(menu)
 people = []
 
 def add(FirstName, LastName, Phone):
-    
     person = {'firstname':FirstName, 'lastname':LastName, 'phone':Phone}
     people.append(person)
 
     with open('db.json', 'w') as file1:
         json.dump(people, file1, indent=4)
 
-    print(f'Successful {person} was added')  
+    print(f'Successful {person["firstname"]} {person["lastname"]}, {person["phone"]}, was added')  
         
 
 def list():
     with open('db.json', 'r')as file2:
         listRecords = json.load(file2)
         for x in listRecords:
-            print(f'{x} \n')
+            print(f'\n\n{x["firstname"]} {x["lastname"]}, {x["phone"]} \n\n {"-" * 50}')
 
 
 def find(value):
@@ -45,44 +44,44 @@ def find(value):
         data_json = json.load(file)
 
         for x in data_json:
-            if x['firstname'] == value or x['lastname'] == value:
-                print(x) # you can make it look nicer
-                return x
+            if x['firstname'].lower() == value or x['lastname'].lower() == value:
+                print(f'{x["firstname"]} {x["lastname"]}, {x["phone"]}')
+                index = data_json.index(x)
+        return index
                 
 
 
 def delete(value):
-        # bob = find(value)
-        # del bob[value]
+        with open('db.json', 'r') as file:
+            new_data_json = json.load(file)
+            index = find(value)
+            print('Has been deleted')
+            del new_data_json[index]
 
-         with open('db.json', 'w') as file:
-            data_json = json.load(file)
-
-            for x in data_json:
-                if x['firstname'] == value or x['lastname'] == value:
-                    del  x    # x is not the actual index number but the actual dictionary                 
+        with open('db.json', 'w') as file2:
+                json.dump(new_data_json, file2, indent=4)              
 
 while True:
     commandLine = input('>>> ')
-#try:
-    values = commandLine.split()
-    command = values[0]
-    args = values[1:]
+    try:
+        values = commandLine.split()
+        command = values[0]
+        args = values[1:]
 
-    match command.lower():
-        case 'add':
-            add(args[0], args[1], args[2])
-        case 'list':
-            list()
-        case 'find':
-            find(args[0])
-        case 'del':
-            delete(args[0])
-        case 'help':
-            print(f'{menu} \n for add "First Name, Last Name, Phone Number" \n value for del and find means either First or Last Name') 
-        case 'quit':
-            break
-        
-#except:
-    #print('Error in entering in information, Please try again')
+        match command.lower():
+            case 'add':
+                add(args[0], args[1], args[2])
+            case 'list':
+                list()
+            case 'find':
+                find(args[0].lower())
+            case 'del':
+                delete(args[0].lower())
+            case 'help':
+                print(f'{menu} \n for add "First Name, Last Name, Phone Number" \n value for del and find means either First or Last Name') 
+            case 'quit':
+                break
+            
+    except:
+        print('Error in entering in information, Please try again')
 
