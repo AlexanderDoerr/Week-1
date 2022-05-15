@@ -29,7 +29,7 @@ def add(FirstName, LastName, Phone):
     with open('db.json', 'w') as file1:
         json.dump(people, file1, indent=4)
 
-    print(f'Successful {person["firstname"]} {person["lastname"]}, {person["phone"]}, was added')  
+    print(f'Successful {person["firstname"]} {person["lastname"]} was added')  
         
 
 def list():
