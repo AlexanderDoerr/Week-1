@@ -59,7 +59,7 @@ def delete(value):
             del new_data_json[index]
 
         with open('db.json', 'w') as file2:
-                json.dump(new_data_json, file2, indent=4)              
+                json.dump(new_data_json, file2, indent=4)            
 
 while True:
     commandLine = input('>>> ')
