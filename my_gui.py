@@ -1,0 +1,41 @@
+import PySimpleGUI as sg
+
+# sg.theme('DarkAmber')   # Add a touch of color
+# # All the stuff inside your window.
+# layout = [  [sg.Text('Some text on Row 1')],
+#             [sg.Text('Enter something on Row 2'), sg.InputText()],
+#             [sg.Button('Ok'), sg.Button('Cancel')] ]
+
+# # Create the Window
+# window = sg.Window('Window Title', layout)
+# # Event Loop to process "events" and get the "values" of the inputs
+# while True:
+#     event, values = window.read()
+#     if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+#         break
+#     print('You entered ', values[0])
+
+# window.close()
+
+# Create the elements
+layout = [
+    [sg.Text('My GUI app')],
+    [sg.Button('Ok')],
+    [sg.Input(key='-INPUT-'), sg.Output(key='-OUTPUT-')]
+]
+
+
+# window = sg.Window(title='Simple Window', layout=[[]], margins=(400,200))
+
+window = sg.Window('Simple Elemnts', layout)
+
+while(True):
+    events, values = window.read()
+    print(events, values)
+
+    window['-OUTPUT-'].update(values['-INPUT-'])
+
+    if events == sg.WIN_CLOSED:
+        break
+
+
